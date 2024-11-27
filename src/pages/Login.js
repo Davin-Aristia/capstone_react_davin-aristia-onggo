@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 
 function Login() {
     const location = useLocation();
-    let navigate = useNavigate()
+    const navigate = useNavigate()
 
     const login = (e) => {
         e.preventDefault();

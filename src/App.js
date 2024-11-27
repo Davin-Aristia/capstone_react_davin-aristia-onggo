@@ -15,7 +15,7 @@ function App() {
       <div>
         <nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
           <div class="container-fluid d-flex justify-content-start">
-              <h3 class="mx-3 mt-1 mb-2">BukaPedia</h3>
+              <h3 class="mx-4 mt-1 mb-2">BukaPedia</h3>
               <Link class="nav-link mx-3 my-2 text-secondary" to="/">Home</Link>
               {
                 !localStorage.getItem("access_token")
