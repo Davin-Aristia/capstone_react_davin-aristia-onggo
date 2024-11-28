@@ -18,20 +18,20 @@ function Login() {
     }
 
     return (
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-4">
-                    <div class="login">
+        <div className="container">
+            <div className="row justify-content-center">
+                <div className="col-4">
+                    <div className="login">
                         <h3 lass="mb-4">Login Page</h3>
                         <form onSubmit={(e) => login(e)}>
-                            <div class="mb-2">
+                            <div className="mb-2">
                                 <input type="email" id="email" placeholder="email"/>
                             </div>
-                            <div class="mb-2">
+                            <div className="mb-2">
                                 <input type="password" id="password" placeholder="password"/>
                             </div>
-                            <div class="mb-2">
-                                <button type="submit" class="btn btn-primary">Login</button>
+                            <div className="mb-2">
+                                <button type="submit" className="btn btn-primary">Login</button>
                             </div>
                         </form>
                     </div>

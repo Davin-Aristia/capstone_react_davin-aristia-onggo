@@ -13,21 +13,21 @@ function App() {
   return (
     <>
       <div>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
-          <div class="container-fluid d-flex justify-content-start">
-              <h3 class="mx-4 mt-1 mb-2">BukaPedia</h3>
-              <Link class="nav-link mx-3 my-2 text-secondary" to="/">Home</Link>
+        <nav className="navbar navbar-expand-lg bg-body-tertiary shadow">
+          <div className="container-fluid d-flex justify-content-start">
+              <h3 className="mx-4 mt-1 mb-2">BukaPedia</h3>
+              <Link className="nav-link mx-3 my-2 text-secondary" to="/">Home</Link>
               {
                 !localStorage.getItem("access_token")
                 &&
-                <Link class="nav-link mx-3 my-2 text-secondary" to="/login">Login</Link>
+                <Link className="nav-link mx-3 my-2 text-secondary" to="/login">Login</Link>
               }
               {
                 localStorage.getItem("access_token")
                 &&
                 <>
-                  <Link class="nav-link mx-3 my-2 text-secondary" to="/cart">Cart</Link>
-                  <Link onClick={() => logout()} class="nav-link mx-3 my-2 text-secondary" to="/">Logout</Link>
+                  <Link className="nav-link mx-3 my-2 text-secondary" to="/cart">Cart</Link>
+                  <Link onClick={() => logout()} className="nav-link mx-3 my-2 text-secondary" to="/">Logout</Link>
                 </>
               }
           </div>

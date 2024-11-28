@@ -44,15 +44,15 @@ function ListProduct() {
             <div className="row">
             {
                 products.map((product) => (
-                    <div style={{width: "20%"}} className="p-3">
+                    <div style={{width: "20%"}} className="p-3" key={product.id}>
                         <div className="card">
                             <img src={product.image} className="card-img-top square-image" alt={product.title} />
                             <div className="card-body">
                                 <h4 className="card-text">{product.title}</h4>
-                                <span class="badge bg-dark mt-4">{product.category}</span>
-                                <p class="card-text my-3">{truncateDescription(product.description, 10)}</p>
-                                <a href={`/product-detail/${product.id}`} class="btn btn-primary me-2">Detail</a>
-                                <span onClick={() => handleAddToCart()} class="btn btn-success">Add to Cart</span>
+                                <span className="badge bg-dark mt-4">{product.category}</span>
+                                <p className="card-text my-3">{truncateDescription(product.description, 10)}</p>
+                                <a href={`/product-detail/${product.id}`} className="btn btn-primary me-2">Detail</a>
+                                <span onClick={() => handleAddToCart()} className="btn btn-success">Add to Cart</span>
                             </div>
                         </div>
                     </div>
