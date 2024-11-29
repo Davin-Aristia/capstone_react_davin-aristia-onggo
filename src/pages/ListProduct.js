@@ -1,28 +1,18 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState, useEffect } from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import { fetchProducts } from '../redux/productSlice';
+// import { addProduct, fetchProducts } from '../redux/userSlice';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios';
 
 function ListProduct() {
-    const [products, setProducts] = useState([])
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const products = useSelector(state => state.products.products)
 
     useEffect(() => {
-        axios.get("https://fakestoreapi.com/products")
-          .then(results => {
-            const datas = results.data.map((result) => ({
-                  id: result.id,
-                  title: result.title,
-                  category: result.category,
-                  image: result.image,
-                  description: result.description,
-                }));
-            setProducts(datas);
-          })
-          .catch((error) => {
-            console.error("Error fetching products:", error);
-            setProducts([]);
-          });
+        dispatch(fetchProducts())
     }, [])
 
     const truncateDescription = (text, maxWords) => {
