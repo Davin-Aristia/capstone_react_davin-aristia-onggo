@@ -1,32 +1,28 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { addProduct, fetchProductById } from '../redux/productSlice';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 
 function ProductDetail() {
-    const [product, setProduct] = useState({})
-    const [quantity, setQuantity] = useState(1);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
+    const [quantity, setQuantity] = useState(1);
     const { id } = useParams()
+    const product = useSelector(state => state.products.product)
 
     useEffect(() => {
-        axios.get(`https://fakestoreapi.com/products/${id}`)
-          .then(result => {
-            const data = {
-                  id: result.data.id,
-                  title: result.data.title,
-                  category: result.data.category,
-                  image: result.data.image,
-                  description: result.data.description,
-                  price: result.data.price,
-                };
-            setProduct(data);
-          })
-          .catch((error) => {
-            console.error("Error fetching product:", error);
-            setProduct([]);
-          });
-    }, [id])
+        dispatch(fetchProductById(id))
+    }, [])
+
+    const handleAddToCart = (product) => {
+        if (!localStorage.getItem("access_token")){
+            navigate("/login")
+        } else {
+            dispatch(addProduct({ ...product, quantity }))
+        }
+    }
 
     return (
         <div className="row">
@@ -47,7 +43,7 @@ function ProductDetail() {
                     onChange={(event) => setQuantity(event.target.value)}
                     style={{ width: "4rem", border: "1px solid red", marginRight: "0.5rem" }}
                 />
-                <button className="btn btn-danger rounded-pill">
+                <button className="btn btn-danger rounded-pill" onClick={() => handleAddToCart(product)}>
                     Add To Cart
                 </button>
                 </div>

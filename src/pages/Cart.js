@@ -1,43 +1,25 @@
 import { Button, Modal } from 'react-bootstrap';
 import { useState } from 'react';
+import { updateQuantity } from '../redux/productSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';  // You still need to include this for the styles
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 function Cart() {
+    const dispatch = useDispatch();
+
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
-    const [carts, setCarts] = useState([
-        {
-            id: 1,
-            title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-            price: 109.95,
-            quantity: 1,
-            image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-        },
-        {
-            id: 2,
-            title: "Mens Casual Premium Slim Fit T-Shirts",
-            price: 22.3,
-            quantity: 1,
-            image: "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
-        },
-        {
-            id: 3,
-            title: "Mens Cotton Jacket",
-            price: 55.99,
-            quantity: 1,
-            image: "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
-        },
-    ]);
+    
+    const carts = useSelector(state => state.products.carts)
 
     const handleQuantityChange = (id, value) => {
-        setCarts(carts.map(cart => 
-            cart.id === id ? { ...cart, quantity: Number(value) } : cart
-        ));
+        const newQuantity = Number(value);
+        dispatch(updateQuantity({ id, quantity: newQuantity }));
     };
+    
 
 
     return (

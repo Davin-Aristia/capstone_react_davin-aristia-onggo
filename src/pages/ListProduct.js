@@ -1,7 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {useDispatch, useSelector} from 'react-redux';
-import { fetchProducts } from '../redux/productSlice';
-// import { addProduct, fetchProducts } from '../redux/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { addProduct, fetchProducts } from '../redux/productSlice';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'
 
@@ -10,6 +9,7 @@ function ListProduct() {
     const dispatch = useDispatch();
 
     const products = useSelector(state => state.products.products)
+    
 
     useEffect(() => {
         dispatch(fetchProducts())
@@ -20,9 +20,11 @@ function ListProduct() {
         return words.length > maxWords ? words.slice(0, maxWords).join(" ") + "..." : text;
     };
 
-    const handleAddToCart = () => {
+    const handleAddToCart = (product) => {
         if (!localStorage.getItem("access_token")){
             navigate("/login")
+        } else {
+            dispatch(addProduct(product))
         }
     }
 
@@ -42,7 +44,7 @@ function ListProduct() {
                                 <span className="badge bg-dark mt-4">{product.category}</span>
                                 <p className="card-text my-3">{truncateDescription(product.description, 10)}</p>
                                 <a href={`/product-detail/${product.id}`} className="btn btn-primary me-2">Detail</a>
-                                <span onClick={() => handleAddToCart()} className="btn btn-success">Add to Cart</span>
+                                <span onClick={() => handleAddToCart(product)} className="btn btn-success">Add to Cart</span>
                             </div>
                         </div>
                     </div>
