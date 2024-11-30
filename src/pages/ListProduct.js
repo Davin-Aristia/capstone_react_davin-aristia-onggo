@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { addProduct, fetchProducts } from '../redux/productSlice';
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 function ListProduct() {
     const navigate = useNavigate();
@@ -10,9 +10,10 @@ function ListProduct() {
 
     const products = useSelector(state => state.products.products)
     
-
     useEffect(() => {
-        dispatch(fetchProducts())
+        if (!products.length){
+            dispatch(fetchProducts())
+        }
     }, [])
 
     const truncateDescription = (text, maxWords) => {
@@ -43,7 +44,7 @@ function ListProduct() {
                                 <h4 className="card-text">{product.title}</h4>
                                 <span className="badge bg-dark mt-4">{product.category}</span>
                                 <p className="card-text my-3">{truncateDescription(product.description, 10)}</p>
-                                <a href={`/product-detail/${product.id}`} className="btn btn-primary me-2">Detail</a>
+                                <Link to={`/product-detail/${product.id}`} className="btn btn-primary me-2">Detail</Link>
                                 <span onClick={() => handleAddToCart(product)} className="btn btn-success">Add to Cart</span>
                             </div>
                         </div>

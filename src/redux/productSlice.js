@@ -45,10 +45,19 @@ const productSlice = createSlice({
                 product.quantity = quantity;
             }
         },
+        checkout: (state) => {
+            state.carts.forEach(cart => {
+                const product = state.products.find(p => p.id === cart.id);
+                if (product && product.stock >= cart.quantity) {
+                    product.stock -= cart.quantity;
+                }
+            });
+            state.carts = [];
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(fetchProducts.fulfilled, (state, action) => {
-            state.products = action.payload
+            state.products = action.payload.map(product => ({ ...product, stock: 20, }))
         })
         builder.addCase(fetchProductById.fulfilled, (state, action) => {
             state.product = action.payload
@@ -56,5 +65,5 @@ const productSlice = createSlice({
     }
 })
 
-export const { addProduct, updateQuantity } = productSlice.actions
+export const { addProduct, updateQuantity, checkout } = productSlice.actions
 export default productSlice.reducer
