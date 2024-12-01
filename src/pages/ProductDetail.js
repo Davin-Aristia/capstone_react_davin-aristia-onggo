@@ -15,7 +15,7 @@ function ProductDetail() {
 
     useEffect(() => {
         dispatch(fetchProductById(id))
-    }, [])
+    }, [dispatch, id])
 
     const handleAddToCart = (product) => {
         if (!localStorage.getItem("access_token")){

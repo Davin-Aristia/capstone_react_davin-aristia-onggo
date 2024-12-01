@@ -13,7 +13,7 @@ function ListProduct() {
         if (!products.length){
             dispatch(fetchProducts())
         }
-    }, [])
+    }, [dispatch, products.length])
 
     return (
         <div style={{width: "90%", marginLeft: "auto", marginRight: "auto"}}>
