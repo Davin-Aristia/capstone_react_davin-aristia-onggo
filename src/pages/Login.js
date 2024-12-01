@@ -29,24 +29,24 @@ function Login() {
     }
 
     return (
-        <div className="container">
+        <div style={{width: "90%", marginLeft: "auto", marginRight: "auto"}}>
+            <h1 className="my-3">Login</h1>
+
+            <hr/>
             <div className="row justify-content-center">
-                <div className="col-4">
-                    <div className="login">
-                        <h3 lass="mb-4">Login Page</h3>
-                        <form onSubmit={(e) => login(e)}>
-                            <div className="mb-2">
-                                <input type="email" id="email" placeholder="email"/>
-                            </div>
-                            <div className="mb-2">
-                                <input type="password" id="password" placeholder="password"/>
-                            </div>
-                            <div className="mb-2">
-                                <button type="submit" className="btn btn-primary">Login</button>
-                            </div>
-                        </form>
+                <form onSubmit={(e) => login(e)}>
+                    <div className="mb-3">
+                        <label for="email">Email Address</label>
+                        <input type="email" className="form-control mt-2" id="email" placeholder="email" style={{ width: "20rem" }}/>
                     </div>
-                </div>
+                    <div className="mb-3">
+                        <label for="password">Password</label>
+                        <input type="password" className="form-control mt-2" id="password" placeholder="password" style={{ width: "20rem" }}/>
+                    </div>
+                    <div className="mb-3">
+                        <button type="submit" className="btn btn-primary">Login</button>
+                    </div>
+                </form>
             </div>
         </div>
     )
