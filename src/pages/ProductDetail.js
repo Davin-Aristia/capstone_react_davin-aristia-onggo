@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addProduct, fetchProductById } from '../redux/productSlice';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'
 
 function ProductDetail() {
     const navigate = useNavigate();
@@ -31,6 +32,12 @@ function ProductDetail() {
  alt={product.title} />
             </div>
             <div className="col-md-8">
+                <nav aria-label="breadcrumb">
+                    <ol className="breadcrumb mt-4 mb-4" style={{ fontSize: "1.2rem" }}>
+                        <li className="breadcrumb-item"><Link to="/">Home</Link></li>
+                        <li className="breadcrumb-item active" aria-current="page">{product.category}</li>
+                    </ol>
+                </nav>
                 <h1 style={{ fontSize: "4rem" }}>{product.title}</h1>
                 <h1 className="mt-5">${product.price}</h1>
                 <div className="d-flex align-items-center mt-5">

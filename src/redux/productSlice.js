@@ -45,6 +45,10 @@ const productSlice = createSlice({
                 product.quantity = quantity;
             }
         },
+        deleteCart: (state, action) => {
+            const { id } = action.payload;
+            state.carts = state.carts.filter(product => product.id !== id);
+        },
         checkout: (state) => {
             state.carts.forEach(cart => {
                 const product = state.products.find(p => p.id === cart.id);
@@ -65,5 +69,5 @@ const productSlice = createSlice({
     }
 })
 
-export const { addProduct, updateQuantity, checkout } = productSlice.actions
+export const { addProduct, updateQuantity, deleteCart, checkout } = productSlice.actions
 export default productSlice.reducer
