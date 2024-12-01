@@ -1,5 +1,7 @@
 import { updateQuantity, deleteCart } from '../redux/productSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function CartItem({cart}) {
     const dispatch = useDispatch();
@@ -11,8 +13,11 @@ function CartItem({cart}) {
         dispatch(updateQuantity({ id, quantity: newQuantity }));
     };
 
-    const handleDelete = (id) => {
+    const handleDelete = (id, title) => {
         dispatch(deleteCart({ id }));
+        toast.success(`${title} has been deleted from your cart!`, {
+            autoClose: 3000,
+        });
     };
 
     return (
@@ -40,7 +45,7 @@ function CartItem({cart}) {
             </td>
             <td>${(cart.price * cart.quantity).toFixed(2)}</td>
             <td style={{ textAlign: "center", color: "red" }}>
-                <i className="bi bi-trash-fill" onClick={() => handleDelete(cart.id)} style={{ cursor: "pointer" }}></i>
+                <i className="bi bi-trash-fill" onClick={() => handleDelete(cart.id, cart.title)} style={{ cursor: "pointer" }}></i>
             </td>
         </tr>
     )

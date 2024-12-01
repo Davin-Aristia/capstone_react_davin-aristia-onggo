@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import CartItem from '../components/CartItem';
 
@@ -15,7 +17,10 @@ function Cart() {
     
     const handleCheckout = () => {
         dispatch(checkout());
-        navigate("/")
+        toast.success(`Checkout successful!`, {
+            autoClose: 3000,
+        });
+        navigate("/");
     };
 
     return (

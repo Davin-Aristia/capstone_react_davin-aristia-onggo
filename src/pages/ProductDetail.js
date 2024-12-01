@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addProduct, fetchProductById } from '../redux/productSlice';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function ProductDetail() {
     const navigate = useNavigate();
@@ -22,6 +24,9 @@ function ProductDetail() {
             navigate("/login")
         } else {
             dispatch(addProduct({ ...product, quantity }))
+            toast.success(`${product.title} has been added to your cart!`, {
+                autoClose: 3000,
+            });
         }
     }
 
