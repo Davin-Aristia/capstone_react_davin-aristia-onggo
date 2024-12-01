@@ -1,7 +1,11 @@
 import { Link, useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Navbar() {
     let navigate = useNavigate()
+
+    const carts = useSelector(state => state.products.carts)
 
     const logout = () => {
       localStorage.removeItem("access_token")
@@ -22,8 +26,17 @@ function Navbar() {
                     localStorage.getItem("access_token")
                     &&
                     <>
-                    <Link className="nav-link mx-3 my-2 text-secondary" to="/cart">Cart</Link>
-                    <Link onClick={() => logout()} className="nav-link mx-3 my-2 text-secondary" to="/">Logout</Link>
+                        {carts.length > 0 ? (
+                            <Link className="nav-link ms-3 me-4 my-2 text-secondary position-relative" to="/cart">
+                                Cart
+                                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary mx-3">
+                                    {carts.length}
+                                </span>
+                            </Link>
+                        ) : (
+                            <Link className="nav-link mx-3 my-2 text-secondary" to="/cart">Cart</Link>
+                        )}
+                        <Link onClick={() => logout()} className="nav-link mx-3 my-2 text-secondary" to="/">Logout</Link>
                     </>
                 }
             </div>
