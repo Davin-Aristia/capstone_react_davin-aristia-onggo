@@ -33,9 +33,9 @@ const productSlice = createSlice({
             const existingProduct = state.carts.find(product => product.id === id);
 
             if (existingProduct) {
-                existingProduct.quantity += quantity;
+                existingProduct.quantity += Number(quantity);
             } else {
-                state.carts.push({ ...action.payload, quantity: quantity });
+                state.carts.push({ ...action.payload, quantity: Number(quantity) });
             }
         },
         updateQuantity: (state, action) => {
