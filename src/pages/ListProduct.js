@@ -1,4 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '../redux/productSlice';
 import { useEffect } from 'react';

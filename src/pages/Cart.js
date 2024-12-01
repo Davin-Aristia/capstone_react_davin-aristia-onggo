@@ -2,10 +2,7 @@
 import { checkout } from '../redux/productSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
-import 'bootstrap/dist/css/bootstrap.min.css'; 
-import 'bootstrap-icons/font/bootstrap-icons.css';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 import CartItem from '../components/CartItem';
 
@@ -63,7 +60,7 @@ function Cart() {
                         </span>
                     </div>
                 ) : (
-                    <h1 className="text-center">Anda belum memilih item</h1>
+                    <h1 className="text-center mt-4">Anda belum memilih item</h1>
                 )
             }
             

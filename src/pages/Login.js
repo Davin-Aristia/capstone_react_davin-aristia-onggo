@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
 
 function Login() {
     const location = useLocation();
@@ -6,15 +7,25 @@ function Login() {
 
     const login = (e) => {
         e.preventDefault();
-        // if (document.getElementById("email").value === "kevin@gmail.com" && document.getElementById("password").value === "kev02937@"){
-        //     localStorage.setItem("access_token", "admin")
-        //     const redirectPath = location.state?.from?.pathname || "/";
-        //     navigate(redirectPath)
-        // }
 
-        localStorage.setItem("access_token", "admin")
-        const redirectPath = location.state?.from?.pathname || "/";
-        navigate(redirectPath)
+        // CREDENTIALS (paste this into .env file):
+        // REACT_APP_USER_EMAIL=kevin@gmail.com
+        // REACT_APP_USER_PASSWORD=kev02937@
+
+        const user_email = process.env.REACT_APP_USER_EMAIL
+        const user_password = process.env.REACT_APP_USER_PASSWORD
+        if (document.getElementById("email").value === user_email && document.getElementById("password").value === user_password){
+            localStorage.setItem("access_token", "admin")
+            const redirectPath = location.state?.from?.pathname || "/";
+            navigate(redirectPath);
+            toast.success(`Welcome back! ${user_email} `, {
+                autoClose: 3000,
+            });
+        } else {
+            toast.warning(`Invalid email or password! Please try again`, {
+                autoClose: 3000,
+            });
+        }
     }
 
     return (

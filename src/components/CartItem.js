@@ -1,7 +1,6 @@
 import { updateQuantity, deleteCart } from '../redux/productSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 function CartItem({cart}) {
     const dispatch = useDispatch();

@@ -2,7 +2,6 @@ import { useNavigate, Link } from 'react-router-dom';
 import { addProduct } from '../redux/productSlice';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 function ProductCard({ product }) {
     const navigate = useNavigate();
