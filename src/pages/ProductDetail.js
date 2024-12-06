@@ -12,6 +12,7 @@ function ProductDetail() {
     const [quantity, setQuantity] = useState(1);
     const { id } = useParams()
     const product = useSelector(state => state.products.product)
+    const loading = useSelector(state => state.products.loading)
 
     useEffect(() => {
         dispatch(fetchProductById(id))
@@ -26,6 +27,20 @@ function ProductDetail() {
                 autoClose: 3000,
             });
         }
+    }
+
+    if (loading) {
+        return (
+            <div className="d-flex justify-content-center text-center align-items-center" style= {{ height: "80vh" }}>
+                <div className="spinner-border text-primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        )
+    }
+
+    if (!product) {
+        return <h1 className="text-center mt-4">Product Not Found</h1>;
     }
 
     return (

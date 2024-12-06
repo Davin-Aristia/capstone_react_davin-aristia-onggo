@@ -8,25 +8,39 @@ function ListProduct() {
     const dispatch = useDispatch();
 
     const products = useSelector(state => state.products.products)
+    const loading = useSelector(state => state.products.loading)
     
     useEffect(() => {
-        if (!products.length){
+        if (!products || !products.length){
             dispatch(fetchProducts())
         }
-    }, [dispatch, products.length])
+    }, [dispatch, products])
 
     return (
         <div style={{width: "90%", marginLeft: "auto", marginRight: "auto"}}>
             <h1 className="my-3">Products</h1>
-
             <hr/>
-            <div className="row">
-            {
-                products.map((product) => (
-                    <ProductCard key={product.id} product={product} />
-                ))
-            }
-            </div>
+
+            {loading ? (
+                <div
+                    className="d-flex justify-content-center text-center align-items-center"
+                    style={{ height: "80vh" }}
+                >
+                    <div className="spinner-border text-primary" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            ) : !products ? (
+                <h1 className="text-center mt-4">Product Not Found</h1>
+            ) : (
+                <div className="row">
+                {
+                    products.map((product) => (
+                        <ProductCard key={product.id} product={product} />
+                    ))
+                }
+                </div>
+            )}
         </div>
     )
 }

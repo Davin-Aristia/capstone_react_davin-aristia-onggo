@@ -18,7 +18,7 @@ function Login() {
             localStorage.setItem("access_token", "admin")
             const redirectPath = location.state?.from?.pathname || "/";
             navigate(redirectPath);
-            toast.success(`Welcome back! ${user_email} `, {
+            toast.info(`Welcome back! ${user_email} `, {
                 autoClose: 3000,
             });
         } else {

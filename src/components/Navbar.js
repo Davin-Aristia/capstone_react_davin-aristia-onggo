@@ -1,5 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 function Navbar() {
     let navigate = useNavigate()
@@ -7,8 +8,11 @@ function Navbar() {
     const carts = useSelector(state => state.products.carts)
 
     const logout = () => {
-      localStorage.removeItem("access_token")
-      navigate("/")
+        localStorage.removeItem("access_token");
+        toast.info(`Logged out successfully!`, {
+            autoClose: 3000,
+        });
+        navigate("/")
     }
     
     return (

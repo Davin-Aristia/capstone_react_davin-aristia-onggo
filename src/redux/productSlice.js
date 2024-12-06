@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 const initialState = {
     products: [],
-    product: [],
+    product: {},
     carts: [],
-
+    loading: false,
 }
 
 export const fetchProducts = createAsyncThunk(
@@ -25,7 +25,7 @@ export const fetchProductById = createAsyncThunk(
 )
 
 const productSlice = createSlice({
-    name: 'products',
+    name: ' ',
     initialState,
     reducers: {
         addProduct: (state, action) => {
@@ -60,14 +60,34 @@ const productSlice = createSlice({
         },
     },
     extraReducers: (builder) => {
-        builder.addCase(fetchProducts.fulfilled, (state, action) => {
-            state.products = action.payload.map(product => ({ ...product, stock: 20, }))
-        })
-        builder.addCase(fetchProductById.fulfilled, (state, action) => {
-            state.product = action.payload
-        })
+        builder
+            .addCase(fetchProducts.pending, (state) => {
+                state.loading = true;
+                state.products = null
+            })
+            .addCase(fetchProducts.fulfilled, (state, action) => {
+                state.loading = false;
+                state.products = action.payload.map(product => ({ ...product, stock: 20, }))
+            })
+            .addCase(fetchProducts.rejected, (state) => {
+                state.loading = false;
+                state.products = null
+            })
+        builder
+            .addCase(fetchProductById.pending, (state) => {
+                state.loading = true;
+                state.product = {}
+            })
+            .addCase(fetchProductById.fulfilled, (state, action) => {
+                state.loading = false;
+                state.product = action.payload
+            })
+            .addCase(fetchProductById.rejected, (state) => {
+                state.loading = false;
+                state.product = null
+            })
     }
 })
 
-export const { addProduct, updateQuantity, deleteCart, checkout } = productSlice.actions
+export const { clearProduct, addProduct, updateQuantity, deleteCart, checkout } = productSlice.actions
 export default productSlice.reducer
